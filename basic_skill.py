@@ -50,7 +50,8 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome"
-    speech_output = "Welcome, you can use me to ask me for prayer times"
+    speech_output = "Welcome, you can use me to ask me for prayer times, "\
+                    "say, 'help', to know more about what I can do"
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
     reprompt_text = "what else would you like to know?"
@@ -61,7 +62,8 @@ def get_welcome_response():
 
 def handle_session_end_request():
     card_title = "Session Ended"
-    speech_output = "Thank you for using me"
+    speech_output = "Thank you for using me"\
+                    "have a nice day!"
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
@@ -99,10 +101,8 @@ def set_color_in_session(intent, session):
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
-
 def get_user_query(intent, session):
     pass
-
 
 def get_color_from_session(intent, session):
     session_attributes = {}
@@ -147,47 +147,26 @@ def on_launch(launch_request, session):
 
 def handle_fajr_start(intent, session):
     pass
-
-
 def handle_fajr_jamat(intent, session):
     pass
-
-
 def handle_fajr_end(intent, session):
     pass
-
-
 def handle_zuhor_start(intent, session):
     pass
-
-
 def handle_zuhor_jamat(intent, session):
     pass
-
-
 def handle_asr_start(intent, session):
     pass
-
-
 def handle_asr_jamat(intent, session):
     pass
-
-
 def handle_maghrib_start(intent, session):
     pass
-
-
 def handle_maghrib_jamat(intent, session):
     pass
-
-
 def handle_esha_start(intent, session):
     pass
-
-
 def handle_esha_jamat(intent, session):
     pass
-
 
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
@@ -235,9 +214,9 @@ def lambda_handler(event, context):
     prevent someone else from configuring a skill that sends requests to this
     function.
     """
-    # if (event['session']['application']['applicationId'] !=
-    #         "amzn1.echo-sdk-ams.app.[unique-value-here]"):
-    #     raise ValueError("Invalid Application ID")
+    if (event['session']['application']['applicationId'] !=
+            "amzn1.ask.skill.a32143af-fb1f-450f-b9d8-7115b6a1f9c9"):
+        raise ValueError("Invalid Application ID")
 
     if event['session']['new']:
         on_session_started({'requestId': event['request']['requestId']},
