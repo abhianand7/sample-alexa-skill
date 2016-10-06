@@ -101,8 +101,6 @@ def set_color_in_session(intent, session):
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
-def get_user_query(intent, session):
-    pass
 
 def get_color_from_session(intent, session):
     session_attributes = {}
@@ -168,6 +166,18 @@ def handle_esha_start(intent, session):
 def handle_esha_jamat(intent, session):
     pass
 
+
+def handle_help_intent(intent, session):
+    session_attributes = {}
+    reprompt_text = None
+    speech_output = "Glad I can be of help, " \
+                    "You can ask me the prayer timings of the whole week ahead, " \
+                    "trying saying, when does Fajr Jamat Starts tomorrow?"
+    should_end_session = False
+    return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output,
+                                                                       reprompt_text, should_end_session))
+
+
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
 
@@ -183,7 +193,7 @@ def on_intent(intent_request, session):
     elif intent_name == "WhatsMyColorIntent":
         return get_color_from_session(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
-        return get_welcome_response()
+        return handle_help_intent(intent, session)
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
         return handle_session_end_request()
     else:
