@@ -8,7 +8,8 @@ http://amzn.to/1LGWsLG
 """
 
 from __future__ import print_function
-
+import datetime
+from datetime import date
 
 # --------------- Helpers that build all of the responses ----------------------
 
@@ -123,7 +124,118 @@ def get_color_from_session(intent, session):
         intent['name'], speech_output, reprompt_text, should_end_session))
 
 
-# --------------- Events ------------------
+def time_method(date):
+    day = datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%A').lower()
+    today = date.today().strftime('%A').lower()
+    return day, today
+
+
+# below methods will fetch the correct day reffered by the user and correspondingly will fetch the time of that day
+def handle_fajr_start(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                 'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                 'saturday': '5:28'}
+    date = intent['slots']['day']['value']
+    day, today = time_method(date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'],output_text,
+                                                                       reprompt_text, should_end_session))
+
+def handle_fajr_jamat(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_fajr_end(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_zuhor_start(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_zuhor_jamat(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_asr_start(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_asr_jamat(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_maghrib_start(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_maghrib_jamat(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_esha_start(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_esha_jamat(intent, session):
+    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
+                  'saturday': '5:28'}
+
+
+def handle_stop_intent(intent, session):
+    pass
+
+
+def handle_yes_intent(intent, session):
+    pass
+
+
+def handle_no_intent(intent, session):
+    pass
+
+def handle_start_over_intent(intent, session):
+    pass
+
+
+def handle_help_intent(intent, session):
+    session_attributes = {}
+    reprompt_text = None
+    speech_output = "Glad I can be of help, " \
+                    "You can ask me the prayer timings of the whole week ahead, " \
+                    "trying saying, when does Fajr Jamat Starts tomorrow?"
+    should_end_session = False
+    return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output,
+                                                                       reprompt_text, should_end_session))
+
+
+    # --------------- Events ------------------
 
 def on_session_started(session_started_request, session):
     """ Called when the session starts """
@@ -143,41 +255,6 @@ def on_launch(launch_request, session):
     return get_welcome_response()
 
 
-def handle_fajr_start(intent, session):
-    pass
-def handle_fajr_jamat(intent, session):
-    pass
-def handle_fajr_end(intent, session):
-    pass
-def handle_zuhor_start(intent, session):
-    pass
-def handle_zuhor_jamat(intent, session):
-    pass
-def handle_asr_start(intent, session):
-    pass
-def handle_asr_jamat(intent, session):
-    pass
-def handle_maghrib_start(intent, session):
-    pass
-def handle_maghrib_jamat(intent, session):
-    pass
-def handle_esha_start(intent, session):
-    pass
-def handle_esha_jamat(intent, session):
-    pass
-
-
-def handle_help_intent(intent, session):
-    session_attributes = {}
-    reprompt_text = None
-    speech_output = "Glad I can be of help, " \
-                    "You can ask me the prayer timings of the whole week ahead, " \
-                    "trying saying, when does Fajr Jamat Starts tomorrow?"
-    should_end_session = False
-    return build_response(session_attributes, build_speechlet_response(intent['name'], speech_output,
-                                                                       reprompt_text, should_end_session))
-
-
 def on_intent(intent_request, session):
     """ Called when the user specifies an intent for this skill """
 
@@ -190,12 +267,42 @@ def on_intent(intent_request, session):
     # Dispatch to your skill's intent handlers
     if intent_name == "GetFajrStart":
         return set_color_in_session(intent, session)
-    elif intent_name == "WhatsMyColorIntent":
-        return get_color_from_session(intent, session)
+    elif intent_name == "GetFajrJamat":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetFajrEnd":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetZuhorStart":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetZuhorJamat":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetAsrStart":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetAsrJamat":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetMaghribStart":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetMaghribJamat":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetEshaStart":
+        return set_color_in_session(intent, session)
+    elif intent_name == "GetEshaJamat":
+        return set_color_in_session(intent, session)
+    # elif intent_name == "WhatsMyColorIntent":
+    #     return get_color_from_session(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return handle_help_intent(intent, session)
-    elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
+    elif intent_name == "AMAZON.StopIntent":
+        return handle_help_intent(intent, session)
+    elif intent_name == "AMAZON.YesIntent":
+        return handle_help_intent(intent, session)
+    elif intent_name == "AMAZON.NoIntent":
+        return handle_help_intent(intent, session)
+    elif intent_name == "AMAZON.StartOverIntent":
+        return handle_help_intent(intent, session)
+    elif intent_name == "AMAZON.CancelIntent":
         return handle_session_end_request()
+    elif intent_name == "AMAZON.StopIntent":
+        return handle_stop_intent(intent, session)
     else:
         raise ValueError("Invalid intent")
 
