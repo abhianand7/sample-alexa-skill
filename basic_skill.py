@@ -124,8 +124,8 @@ def get_color_from_session(intent, session):
         intent['name'], speech_output, reprompt_text, should_end_session))
 
 
-def time_method(date):
-    day = datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%A').lower()
+def time_method(query_date):
+    day = datetime.datetime.strptime(query_date, '%Y-%m-%d').strftime('%A').lower()
     today = date.today().strftime('%A').lower()
     return day, today
 
@@ -135,8 +135,8 @@ def handle_fajr_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                  'saturday': '5:28'}
-    date = intent['slots']['day']['value']
-    day, today = time_method(date)
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
     if day == today:
         prayer_time = fajr_start[day]
     else:
@@ -144,7 +144,7 @@ def handle_fajr_start(intent, session):
     session_attributes = {}
     reprompt_text = None
     should_end_session = False
-    output_text = "The prayer time for %s is at %s" % day, prayer_time
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
 
     return build_response(session_attributes, build_speechlet_response(intent['name'],output_text,
                                                                        reprompt_text, should_end_session))
@@ -153,66 +153,204 @@ def handle_fajr_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_fajr_end(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_zuhor_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_zuhor_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_asr_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_asr_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_maghrib_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_maghrib_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_esha_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_esha_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
+    query_date = intent['slots']['day']['value']
+    day, today = time_method(query_date)
+    if day == today:
+        prayer_time = fajr_start[day]
+    else:
+        prayer_time = fajr_start[day]
+    session_attributes = {}
+    reprompt_text = None
+    should_end_session = False
+    output_text = "The prayer time for %s is at %s" % day, prayer_time.replace(':', ',')
+
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
 def handle_stop_intent(intent, session):
-    pass
+    session_attributes = {}
+    reprompt_text = None
+    output_text = "Stopping" \
+                  "ask again" \
+                  "say cancel to exit the skill"
+    should_end_session = False
+    return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
+                                                                       reprompt_text, should_end_session))
 
 
+# more intent handlers for future use
 def handle_yes_intent(intent, session):
     pass
 
