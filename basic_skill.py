@@ -243,8 +243,8 @@ def handle_invalid_intent(intent, session):
 def handle_stop_intent(intent, session):
     session_attributes = {}
     reprompt_text = None
-    output_text = "Stopping " \
-                  "ask again " \
+    output_text = "Stopping, " \
+                  "ask again, " \
                   "say cancel to exit the skill"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
