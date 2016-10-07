@@ -266,37 +266,37 @@ def on_intent(intent_request, session):
 
     # Dispatch to your skill's intent handlers
     if intent_name == "GetFajrStart":
-        return set_color_in_session(intent, session)
+        return handle_fajr_start(intent, session)
     elif intent_name == "GetFajrJamat":
-        return set_color_in_session(intent, session)
+        return handle_fajr_jamat(intent, session)
     elif intent_name == "GetFajrEnd":
-        return set_color_in_session(intent, session)
+        return handle_fajr_end(intent, session)
     elif intent_name == "GetZuhorStart":
-        return set_color_in_session(intent, session)
+        return handle_zuhor_start(intent,session)
     elif intent_name == "GetZuhorJamat":
-        return set_color_in_session(intent, session)
+        return handle_zuhor_jamat(intent, session)
     elif intent_name == "GetAsrStart":
-        return set_color_in_session(intent, session)
+        return handle_asr_start(intent,session)
     elif intent_name == "GetAsrJamat":
-        return set_color_in_session(intent, session)
+        return handle_asr_jamat(intent, session)
     elif intent_name == "GetMaghribStart":
-        return set_color_in_session(intent, session)
+        return handle_maghrib_start(intent, session)
     elif intent_name == "GetMaghribJamat":
-        return set_color_in_session(intent, session)
+        return handle_maghrib_jamat(intent, session)
     elif intent_name == "GetEshaStart":
-        return set_color_in_session(intent, session)
+        return handle_esha_start(intent, session)
     elif intent_name == "GetEshaJamat":
-        return set_color_in_session(intent, session)
+        return handle_esha_jamat(intent,session)
     # elif intent_name == "WhatsMyColorIntent":
     #     return get_color_from_session(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
         return handle_help_intent(intent, session)
     elif intent_name == "AMAZON.StopIntent":
-        return handle_help_intent(intent, session)
+        return handle_stop_intent(intent, session)
     elif intent_name == "AMAZON.YesIntent":
-        return handle_help_intent(intent, session)
+        return handle_yes_intent(intent, session)
     elif intent_name == "AMAZON.NoIntent":
-        return handle_help_intent(intent, session)
+        return handle_no_intent(intent, session)
     elif intent_name == "AMAZON.StartOverIntent":
         return handle_help_intent(intent, session)
     elif intent_name == "AMAZON.CancelIntent":
