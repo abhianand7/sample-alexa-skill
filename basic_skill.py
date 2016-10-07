@@ -233,7 +233,7 @@ def handle_esha_jamat(intent, session):
 def handle_invalid_intent(intent, session):
     session_attributes = {}
     reprompt_text = None
-    output_text = "Sorry I didn't catch that " \
+    output_text = "Sorry I didn't catch that, " \
                   "Plese try saying that again"
     should_end_session = False
     return build_response(session_attributes,
