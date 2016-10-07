@@ -125,8 +125,11 @@ def get_color_from_session(intent, session):
 
 
 def time_method(query_date):
-    day = datetime.datetime.strptime(query_date, '%Y-%m-%d').strftime('%A').lower()
     today = date.today().strftime('%A').lower()
+    if query_date:
+        day = datetime.datetime.strptime(query_date, '%Y-%m-%d').strftime('%A').lower()
+    else:
+        day = today
     return day, today
 
 
@@ -135,8 +138,11 @@ def handle_fajr_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                  'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                  'saturday': '5:28'}
-    query_date = intent['slots']['day']['value']
-    day, today = time_method(query_date)
+    try:
+        query_date = intent['slots']['day']['value']
+    except:
+        query_date = ''
+        day, today = time_method(query_date)
     if day == today:
         prayer_time = fajr_start[day]
     else:
