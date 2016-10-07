@@ -150,7 +150,7 @@ def handle_fajr_start(intent, session):
     session_attributes = {}
     reprompt_text = None
     should_end_session = False
-    output_text = "The prayer time for {0} is at {1}".format(query_day, prayer_time.replace(':', ','))
+    output_text = "The prayer time for {0} is at {1}".format(query_day, prayer_time.replace(':', ' '))
 
     return build_response(session_attributes, build_speechlet_response(intent['name'],output_text,
                                                                        reprompt_text, should_end_session))
