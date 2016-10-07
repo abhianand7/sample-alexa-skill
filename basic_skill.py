@@ -230,6 +230,16 @@ def handle_esha_jamat(intent, session):
     return handle_query(intent, esha_jamat)
 
 
+def handle_invalid_intent(intent, session):
+    session_attributes = {}
+    reprompt_text = None
+    output_text = "Sorry I didn't catch that " \
+                  "Plese try saying that again"
+    should_end_session = False
+    return build_response(session_attributes,
+                          build_speechlet_response(intent['name'],output_text, reprompt_text, should_end_session))
+
+
 def handle_stop_intent(intent, session):
     session_attributes = {}
     reprompt_text = None
