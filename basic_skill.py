@@ -161,73 +161,73 @@ def handle_fajr_start(intent, session):
 
 
 def handle_fajr_jamat(intent, session):
-    fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
+    fajr_jamat = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_jamat)
 
 
 def handle_fajr_end(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_zuhor_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_zuhor_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_asr_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_asr_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_maghrib_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_maghrib_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_esha_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_esha_jamat(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                   'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                   'saturday': '5:28'}
-    return intent, fajr_start
+    return handle_query(intent, fajr_start)
 
 
 def handle_stop_intent(intent, session):
