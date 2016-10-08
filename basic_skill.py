@@ -122,31 +122,48 @@ def create_favorite_color_attributes(favorite_color):
 #     # understood, the session will end.
 #     return build_response(session_attributes, build_speechlet_response(
 #         intent['name'], speech_output, reprompt_text, should_end_session))
+# d0 = date.today()
+# d1 = datetime.datetime.strptime('2016-10-29', '%Y-%m-%d')
+# d1 = date(d1.year, d1.month, d1.day)
+# print ((d1 - d0).days)
 
 
-def time_method(query_date):
-    today = date.today().strftime('%A').lower()
-    if query_date:
-        day = datetime.datetime.strptime(query_date, '%Y-%m-%d').strftime('%A').lower()
+def time_method(query):
+    today = date.today()
+    today_day = today.strftime('%A').lower()
+    if query:
+        query_date = datetime.datetime.strptime(query, '%Y-%m-%d')
+        query_day = query_date.strftime('%A').lower()
+        query_date_date = date(query_date.year, query_date.month, query_date.day)
+        delta = (query_date_date - today).days
     else:
-        day = today
-    return day, today
+        query_day = today_day
+        delta = 0
+    return query_day, today_day, delta
 
 
-def handle_query(intent, time_log):
+def handle_query(intent, time_log, prayer):
     try:
         query_date = intent['slots']['day']['value']
     except:
         query_date = ''
-    query_day, today = time_method(query_date)
+    query_day, today, delta = time_method(query_date)
     if query_day == today:
         prayer_time = time_log[query_day]
+        query_day = 'today'
     else:
+        # from time delta get the days apart
+        # if day apart is 1, make query_day = 'tomorrow'
+        # otherwise, make the query_day = 'on next {0}'.format(query_day)
         prayer_time = time_log[query_day]
+        if delta == 1:
+            query_day = 'on tomorrow'
+        else:
+            query_day = 'on {0}'.format(query_day)
     session_attributes = {}
     reprompt_text = None
     should_end_session = False
-    output_text = "The prayer time for {0} is at {1}".format(query_day, prayer_time.replace(':', ' '))
+    output_text = "{0} at {1} {2}".format(prayer, prayer_time.replace(':', ' '), query_day)
 
     return build_response(session_attributes, build_speechlet_response(intent['name'], output_text,
                                                                        reprompt_text, should_end_session))
@@ -157,77 +174,77 @@ def handle_fajr_start(intent, session):
     fajr_start = {'sunday': '5:17', 'monday': '5:18', 'tuesday': '5:21',
                     'wednesday': '5:23', 'thursday': '5:24', 'friday': '5:27',
                     'saturday': '5:28'}
-    return handle_query(intent, fajr_start)
+    return handle_query(intent, fajr_start, 'Fajr, starts')
 
 
 def handle_fajr_jamat(intent, session):
     fajr_jamat = {'sunday': '5:47', 'monday': '5:48', 'tuesday': '5:51',
                   'wednesday': '5:53', 'thursday': '5:54', 'friday': '5:57',
                   'saturday': '5:57'}
-    return handle_query(intent, fajr_jamat)
+    return handle_query(intent, fajr_jamat, 'Fajr Jamat is')
 
 
 def handle_fajr_end(intent, session):
     fajr_end = {'sunday': '6:46', 'monday': '6:47', 'tuesday': '6:49',
                   'wednesday': '6:51', 'thursday': '6:52', 'friday': '6:54',
                   'saturday': '6:55'}
-    return handle_query(intent, fajr_end)
+    return handle_query(intent, fajr_end, 'Fajr, ends')
 
 
 def handle_zuhor_start(intent, session):
     zuhor_start = {'sunday': '12:58', 'monday': '12:57', 'tuesday': '12:57',
                   'wednesday': '12:57', 'thursday': '12:56', 'friday': '12:56',
                   'saturday': '12:56'}
-    return handle_query(intent, zuhor_start)
+    return handle_query(intent, zuhor_start, 'Zuhor, starts')
 
 
 def handle_zuhor_jamat(intent, session):
     zuhor_jamat = {'sunday': '1:15', 'monday': '1:30', 'tuesday': '1:30',
                   'wednesday': '1:30', 'thursday': '1:30', 'friday': '1:30',
                   'saturday': '1:30'}
-    return handle_query(intent, zuhor_jamat)
+    return handle_query(intent, zuhor_jamat, 'Zuhor Jamat is')
 
 
 def handle_asr_start(intent, session):
     asr_start = {'sunday': '4:59', 'monday': '4:57', 'tuesday': '4:55',
                   'wednesday': '5:53', 'thursday': '4:51', 'friday': '4:49',
                   'saturday': '4:47'}
-    return handle_query(intent, asr_start)
+    return handle_query(intent, asr_start, 'Asr, starts')
 
 
 def handle_asr_jamat(intent, session):
     asr_jamat = {'sunday': '5:15', 'monday': '5:15', 'tuesday': '5:15',
                   'wednesday': '5:15', 'thursday': '5:15', 'friday': '5:15',
                   'saturday': '5:15'}
-    return handle_query(intent, asr_jamat)
+    return handle_query(intent, asr_jamat, 'Asr Jamat is')
 
 
 def handle_maghrib_start(intent, session):
     maghrib_start = {'sunday': '6:59', 'monday': '6:56', 'tuesday': '6:54',
                   'wednesday': '6:52', 'thursday': '6:50', 'friday': '6:47',
                   'saturday': '6:45'}
-    return handle_query(intent, maghrib_start)
+    return handle_query(intent, maghrib_start, 'Maghrib, starts')
 
 
 def handle_maghrib_jamat(intent, session):
     maghrib_jamat = {'sunday': '7:04', 'monday': '7:01', 'tuesday': '6:59',
                   'wednesday': '6:59', 'thursday': '6:57', 'friday': '6:55',
                   'saturday': '6:52'}
-    return handle_query(intent, maghrib_jamat)
+    return handle_query(intent, maghrib_jamat, 'Maghrib Jamat is')
 
 
 def handle_esha_start(intent, session):
     esha_start = {'sunday': '8:15', 'monday': '8:12', 'tuesday': '8:11',
                   'wednesday': '8:09', 'thursday': '8:07', 'friday': '8:04',
                   'saturday': '8:02'}
-    return handle_query(intent, esha_start)
+    return handle_query(intent, esha_start, 'Esha, starts')
 
 
 def handle_esha_jamat(intent, session):
     esha_jamat = {'sunday': '8:30', 'monday': '8:30', 'tuesday': '8:30',
                   'wednesday': '8:30', 'thursday': '8:30', 'friday': '8:30',
                   'saturday': '8:30'}
-    return handle_query(intent, esha_jamat)
+    return handle_query(intent, esha_jamat, 'Esha Jamat is')
 
 
 def handle_invalid_intent(intent, session):
@@ -237,7 +254,7 @@ def handle_invalid_intent(intent, session):
                   "Plese try saying that again"
     should_end_session = False
     return build_response(session_attributes,
-                          build_speechlet_response(intent['name'],output_text, reprompt_text, should_end_session))
+                          build_speechlet_response(intent['name'], output_text, reprompt_text, should_end_session))
 
 
 def handle_stop_intent(intent, session):
